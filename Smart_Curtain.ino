@@ -1,19 +1,12 @@
-//////////////////////////////////////////////
-//        RemoteXY include library          //
-//////////////////////////////////////////////
-
 #define REMOTEXY_MODE__SOFTSERIAL
-
 #include <SoftwareSerial.h>
-
 #define REMOTEXY_SERIAL_RX 3
 #define REMOTEXY_SERIAL_TX 2
 #define REMOTEXY_SERIAL_SPEED 9600
 #define REMOTEXY_ACCESS_PASSWORD "1234"
-
-#include <RemoteXY.h>
- 
+#include <RemoteXY.h> 
 #pragma pack(push, 1)  
+
 uint8_t RemoteXY_CONF[] =
   { 255,3,0,1,0,102,0,19,0,0,0,83,109,97,114,116,32,67,117,114,
   116,97,105,110,0,24,1,106,200,1,1,5,0,12,31,29,45,10,192,30,
@@ -32,24 +25,13 @@ struct {
 } RemoteXY;   
 #pragma pack(pop)
 
-//////////////////////////////////////////////
-//        Definisi Pin dan Variabel         //
-//////////////////////////////////////////////
-
-// Pin Motor DC
 #define MOTOR_IN1 5
 #define MOTOR_IN2 6
 #define MOTOR_EN 9
-
-// Pin LDR
 #define LDR_PIN A0
-
-// Kecepatan Motor
 #define MOTOR_SPEED 100
-
-// Level dan waktu gerakan
-#define LEVEL_1 800
-#define LEVEL_2 500
+#define LEVEL_1 600
+#define LEVEL_2 200
 #define LEVEL_3 0
 #define TIME_LEVEL_2 2000
 #define TIME_LEVEL_3 2000
@@ -63,9 +45,7 @@ const int adjustDelay = 2000;
 bool isAutomatic = true;
 int previousLevel = 1; 
 
-//////////////////////////////////////////////
-//        Fungsi Setup dan Loop             //
-//////////////////////////////////////////////
+// Fungsi Setup dan Loop
 
 void setup() {
   RemoteXY_Init();
@@ -124,9 +104,7 @@ void loop() {
   }
 }
 
-//////////////////////////////////////////////
-//        Fungsi Kontrol Motor              //
-//////////////////////////////////////////////
+// Fungsi Kontrol Motor
 
 void stopMotor() {
   digitalWrite(MOTOR_IN1, LOW);
@@ -150,9 +128,7 @@ void moveMotorRight(int duration) {
   stopMotor();
 }
 
-//////////////////////////////////////////////
-//        Fungsi Logika Kontrol             //
-//////////////////////////////////////////////
+// Fungsi Logika Kontrol
 
 int determineLevel(int ldrValue) {
   if (ldrValue >= LEVEL_1) {
